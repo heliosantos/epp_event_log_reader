@@ -1,10 +1,12 @@
 import datetime
 import glob
 import os
+import logging
 
 from .event_log_entry import EventLogEntry, EventLogEntryNode
 from .epp_event_log_reader import EventLogReader
 
+logger = logging.getLogger('epp_event_test_reader')
 
 OPEN_SCOPE_TAGS = {
     EventLogEntry.START,
@@ -71,7 +73,7 @@ def read_test_events(dirpath, entryclass=EventLogEntryNode) -> list[EventLogEntr
 
     for i, fpath in enumerate(files):
         group, userId = group_info(fpath)
-        print(f'{userId} of {group} ({i + 1}/{tfiles})')
+        logger.info(f'{userId} of {group} ({i + 1}/{tfiles})')
         entries.extend(read_events_file(fpath, entryclass=entryclass))
 
     add_scope(entries)
