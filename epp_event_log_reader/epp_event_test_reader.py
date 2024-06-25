@@ -2,6 +2,7 @@ import datetime
 import glob
 import os
 import logging
+import pathlib
 
 from .event_log_entry import EventLogEntry, EventLogEntryNode
 from .epp_event_log_reader import EventLogReader
@@ -50,12 +51,15 @@ def read_events_file(fpath: str, entryclass=EventLogEntryNode) -> list[EventLogE
     groupName = fpath.split('\\')[-2]
     groupUserId = fpath.split('\\')[-1].replace('.event', '')
 
+    injectorName = pathlib.Path(fpath).parent.parent.parent.name
+
     events = []
     elr = EventLogReader(fpath)
     while elr.read(logEntry := entryclass(), 0):
         logEntry.time = datetime.timedelta(milliseconds=logEntry.time)
         logEntry.groupName = groupName
         logEntry.groupUserId = groupUserId
+        logEntry.injectorName = injectorName
         events.append(logEntry)
 
     return events

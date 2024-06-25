@@ -1,5 +1,3 @@
-
-
 class EventLogEntry:
     NULL_EVENT = 0
     CONNECT = 1
