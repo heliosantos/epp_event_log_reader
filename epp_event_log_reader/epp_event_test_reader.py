@@ -14,6 +14,7 @@ OPEN_SCOPE_TAGS = {
     EventLogEntry.START_ACTIVITY,
     EventLogEntry.CURRENT_SCRIPT,
     EventLogEntry.START_TRANSACTION,
+    EventLogEntry.START_TIMING,
 }
 
 
@@ -22,6 +23,8 @@ CLOSE_SCOPE_TAGS = {
     EventLogEntry.END_ACTIVITY,
     EventLogEntry.END_TRANSACTION,
     EventLogEntry.FAIL_TRANSACTION,
+    EventLogEntry.END_TIMING,
+    EventLogEntry.FAIL_TIMING,
 }
 
 
